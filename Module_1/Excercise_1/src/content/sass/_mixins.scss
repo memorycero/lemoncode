@@ -1,0 +1,7 @@
+
+$baseColor: red;
+
+@mixin init-comp-settings {
+    flex-grow: 1;
+    margin-left: 2px;
+}

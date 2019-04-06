@@ -1,0 +1,33 @@
+@import "mixins.scss";
+
+body {
+    font-family: monospace;
+    min-height: 30vh;
+    display: flex;
+}
+
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.base-color {
+    @include init-comp-settings;
+    background-color: $baseColor;
+}
+
+@for $index from 1 to 5 {
+        .darken-#{$index}{
+            @include init-comp-settings;
+            background-color: darken($color: $baseColor, $amount: $index*10);
+        }
+}
+
+@for $index from 1 to 5 {
+        .lighten-#{$index}{
+            @include init-comp-settings;
+            background-color: lighten($color: $baseColor, $amount: $index*10);
+     }
+}
