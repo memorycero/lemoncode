@@ -1,0 +1,39 @@
+
+@import "theme_2.scss";
+
+.base {
+    @include box-settings;
+    background-color: $base-color;
+}
+
+.important {
+    @include box-settings;
+    background-color: $important-color;
+}
+
+.warning {
+    @include box-settings;
+    background-color: $warning-color;
+}
+
+.shadow-box {
+    @include box-settings;
+    box-shadow: $shadow-box;
+    background-color: $shadow-box-color;
+}
+
+#main-font {
+    margin-top: 10px;
+    @include main-font;
+}
+
+#secondary-font {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    @include secondary-font;
+}
+
+p {
+    margin-left: 15%;
+    margin-top: 15%;
+}

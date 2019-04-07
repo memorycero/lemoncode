@@ -1,0 +1,38 @@
+
+$base-color:blue;
+$important-color:#0A156F;
+$warning-color:cyan;
+$shadow-box-color:white;
+
+$shadow-box:5px 5px 10px black;
+
+@mixin box-settings {
+    @include box-size-settings;
+    @include box-font-settings;
+    @include box-default-border-settings;
+}
+
+@mixin box-size-settings {
+    width: 20vh;
+    height: 15vh;
+}
+
+@mixin box-font-settings {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+}
+
+@mixin box-default-border-settings {
+    border: 1px solid gray;
+    border-radius: 0.3em;
+}
+
+@mixin main-font {
+    font-size: 22px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+@mixin secondary-font {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
