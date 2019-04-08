@@ -1,0 +1,10 @@
+
+@import "layout.scss";
+
+@media screen and (min-width: 40rem){
+    @include higher-resolution;
+}
+
+@media screen and (max-width: 39.9rem){
+    @include lower-resolution;
+}

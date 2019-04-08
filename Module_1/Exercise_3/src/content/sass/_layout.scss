@@ -1,0 +1,73 @@
+
+$borderColor:rgb(156, 155, 155);
+
+@mixin higher-resolution {
+    @include init-page;
+    @include init-main-menu;
+    @include init-secondary-menu;
+}
+
+@mixin lower-resolution {
+    @include init-page;
+    @include init-main-menu;
+    @include init-secondary-menu;
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        height: 100%;
+    }
+
+    .content {
+        flex-grow: 1;
+    }
+
+    .main-menu-item2 {
+        display: none;
+    }
+}
+
+
+@mixin init-page {
+    body {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12px;
+        border: 2px solid $borderColor;
+        display: flex;
+        flex-direction: column;
+    }
+
+    div {
+        display: flex;
+    }
+}
+
+@mixin init-main-menu {
+    @for $index from 1 to 4 {
+        .main-menu-item#{$index}{
+            flex-grow: 1;
+            background-color: pink;
+            @include set-justify-content($index);
+        }
+    }
+}
+
+@mixin set-justify-content($index) {
+    @if ($index == 2) {
+        justify-content: center;
+    } @else if ($index == 3){
+        justify-content: flex-end; 
+    } 
+}
+
+@mixin init-secondary-menu {
+    @for $index from 1 to 8 {
+        .secondary-menu-item#{$index}{
+            flex-grow: 1;
+            border: 1px solid $borderColor;
+            justify-content: center;
+        }
+    }
+}
