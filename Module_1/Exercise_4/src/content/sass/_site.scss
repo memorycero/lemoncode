@@ -1,43 +1,17 @@
 
 @import "_layout.scss";
 
-body {
-    margin: 0;
+
+@media screen and (min-width: 1150px){
+    @include x-large-resolution;
 }
 
-.menu {
-    grid-area: menu;
-    background-color: pink;
-    display: flex;
-    flex-direction: column;
-}
-
-.content-a {
-    grid-area: content-a ;
-    background-color: blue;
-}
-
-.content-b {
-    grid-area: content-b;
-    background-color: yellow;
-}
-
-@media screen and (min-width: 1176px){
-    .main-display{
-        @include x-large-resolution;
-    }
-}
-
-@media screen and (max-width: 1175px) and (min-width: 867px) {
-    .main-display{
-        @include large-resolution;
-    }
+@media screen and (max-width: 1149px) and (min-width: 867px) {
+     @include large-resolution;
 }
 
 @media screen and (max-width: 866px) and (min-width: 576px) {
-    .main-display{
-        @include medium-resolution;
-    }
+    @include medium-resolution;
 }
 
 @media screen and (max-width: 575px) {

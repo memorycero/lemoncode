@@ -1,6 +1,24 @@
 
-@mixin base-grid-definition {
-    display: grid;
+@mixin base-layout-definition {
+    body {
+        margin: 0;
+    }
+
+    .menu {
+        grid-area: menu;
+        background-color: pink;
+        display: flex;
+    }
+    
+    .content-a {
+        grid-area: content-a ;
+        background-color: blue;
+    }
+    
+    .content-b {
+        grid-area: content-b;
+        background-color: yellow;
+    }
 
     a {
         flex-grow: 1;
@@ -8,37 +26,55 @@
 }
 
 @mixin x-large-resolution {
-    @include base-grid-definition;
+    @include base-layout-definition;
 
-    grid-template-areas: 
-    ". . menu content-a . ."
-    ". . menu content-b . .";
-    grid-template-columns: 0.3fr 0.3fr 1fr 2fr 0.3fr 0.3fr;
-    grid-template-rows: 50vh 50vh;
+    .main-display {
+        display: grid;
+        grid-template-areas: 
+        ". . menu content-a . ."
+        ". . menu content-b . .";
+        grid-template-columns: 0.3fr 0.3fr 1fr 2fr 0.3fr 0.3fr;
+        grid-template-rows: 50vh 50vh;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
 }
 
-
 @mixin large-resolution {
-    @include base-grid-definition;
+    @include base-layout-definition;
 
-    grid-template-areas: 
-    ". menu content-a ."
-    ". menu content-b .";
-    grid-template-columns: 0.3fr 1fr 2fr 0.3fr;
-    grid-template-rows: 50vh 50vh;
+    .main-display {
+        display: grid;
+        grid-template-areas: 
+        ". menu content-a ."
+        ". menu content-b .";
+        grid-template-columns: 0.3fr 1fr 2fr 0.3fr;
+        grid-template-rows: 50vh 50vh;
+    }
+
+    .menu {
+        flex-direction: column;
+    }
 }
 
 @mixin medium-resolution {
-    @include base-grid-definition;
+    @include base-layout-definition;
 
-    grid-template-areas: 
-    "menu"
-    "content-a"
-    "content-b";
-    grid-template-rows: 33vh 33vh 34vh;
+    .main-display {
+        display: grid;
+        grid-template-areas: 
+        "menu"
+        "content-a"
+        "content-b";
+        grid-template-rows: 16vh 42vh 42vh;
+    }
 }
 
 @mixin small-resolution {
+    @include base-layout-definition;
+
     html {
         width: 100%;
         height: 100%;
@@ -47,7 +83,6 @@
     body {
         display: flex;
         height: 100%;
-        margin: 0;
     }
 
     div {
@@ -59,9 +94,6 @@
         width: 100%;
     }
 
-    .menu {
-        flex-direction: row ;
-    }
     .content-a {
         flex-grow: 1;
     }
