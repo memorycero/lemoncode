@@ -14,27 +14,21 @@ module.exports = merge(common, {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            localIdentName: '[name]__[local]___[hash:base64:5]',
-                            camelCase: true,
-                        },
+                  MiniCssExtractPlugin.loader,
+                  'css-loader',
+                  {
+                    loader: 'sass-loader',
+                    options: {
+                      implementation: require('sass'),
                     },
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            implementation: require('sass'),
-                        },
-                    },
+                  },
                 ],
-            },
-            {
+              },
+        
+              {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
+              },
         ],
     },
     plugins: [

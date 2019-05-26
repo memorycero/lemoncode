@@ -8,6 +8,7 @@
     "start:prod": "webpack-dev-server --open --config prod.webpack.config.js",
     "build:dev": "rimraf dist && webpack --config dev.webpack.config.js",
     "build:prod": "rimraf dist && webpack --config prod.webpack.config.js",
+    "build:perf": "rimraf dist && webpack --config perf.webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
