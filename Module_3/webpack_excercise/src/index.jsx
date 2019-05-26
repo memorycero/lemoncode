@@ -10,3 +10,5 @@ ReactDOM.render(
     <HelloWorldComponent greet={'Hello World From React!!!!'} />,
     document.getElementById('root')
 );
+
+console.log(`Base url: ${process.env.API_BASE}`);
