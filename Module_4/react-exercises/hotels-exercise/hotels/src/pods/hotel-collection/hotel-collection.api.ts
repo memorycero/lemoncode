@@ -46,9 +46,7 @@ const getHotelsUrl = `${baseApiUrl}/api/hotels`;
 // would be a good idea
 export const getHotelCollection = () : Promise<HotelEntityApi[]> => {  
   const promise = new Promise<HotelEntityApi[]>((resolve, reject) => 
-    Axios.get<HotelEntityApi[]>(getHotelsUrl).then((response) => resolve(response.data)
+    Axios.get<HotelEntityApi[]>(getHotelsUrl).then((response) => resolve(response.data['hotels'])
   ));
-
   return promise;
 }
-

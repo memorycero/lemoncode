@@ -1,2 +1,16 @@
-export const mapFromAToBCollection = <ORIGIN,DESTINATION>(singleMapperfn : (ORIGIN) => DESTINATION, inputCollection : ORIGIN[]) : DESTINATION[] => 
-  inputCollection.map(singleMapperfn);
+import { HotelEntityApi } from '../pods/hotel-collection/hotel-collection.api';
+import {HotelEntityVm} from '../pods/hotel-collection/hotel-collection.vm';
+import {baseApiUrl} from 'core';
+
+
+export const mapFromApiToVm = (apiEntity: HotelEntityApi) : HotelEntityVm => ({ 
+  id: apiEntity.id, 
+  picture: `${baseApiUrl}${apiEntity.thumbNailUrl}`, 
+  name: apiEntity.name, 
+  rating: apiEntity.hotelRating, 
+  description: apiEntity.shortDescription, 
+  address: apiEntity.address1, 
+});
+
+export const mapFromApiCollectionToVmCollection = (apiEntityCollection : HotelEntityApi[]) : HotelEntityVm[] => 
+apiEntityCollection.map((apiEntity) => mapFromApiToVm(apiEntity));

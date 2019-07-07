@@ -1,10 +1,12 @@
 import * as React from "react";
 import { HotelCollectionComponent } from "./hotel-collection.component";
 import { HotelEntityVm } from "./hotel-collection.vm";
-import { basePicturesUrl } from "core";
-import { getHotelCollection, HotelEntityApi } from "./hotel-collection.api";
-import { mapFromApiToVm } from "./hotel-collection.mapper";
-import { mapFromAToBCollection } from "common";
+import { routesLinks } from "core";
+import { getHotelCollection } from "./hotel-collection.api";
+import { mapFromApiCollectionToVmCollection } from "common";
+import { RouteComponentProps, withRouter } from "react-router";
+
+interface Props extends RouteComponentProps {}
 
 const useHotelCollection = () => {
   const [hotelCollection, setHotelCollection] = React.useState<HotelEntityVm[]>(
@@ -13,14 +15,15 @@ const useHotelCollection = () => {
 
   const loadHotelCollection = () =>
     getHotelCollection().then(result =>
-      setHotelCollection(mapFromAToBCollection(mapFromApiToVm, result))
+      setHotelCollection(mapFromApiCollectionToVmCollection(result))
     );
 
   return { hotelCollection, loadHotelCollection };
 };
 
-export const HotelCollectionContainer = () => {
+export const HotelCollectionContainerInner = (props: Props) => {
   const {hotelCollection, loadHotelCollection} = useHotelCollection();
+  const {history} = props;
 
   React.useEffect(() => {
     loadHotelCollection();
@@ -28,5 +31,11 @@ export const HotelCollectionContainer = () => {
     return () => {console.log('do your cleanup here')}
   }, []);
 
-  return <HotelCollectionComponent hotelCollection={hotelCollection} />;
+  const navigateToHotel = (id: string) => {
+    history.push(routesLinks.hotelEdit(id));
+  }
+
+  return <HotelCollectionComponent hotelCollection={hotelCollection} onEditHotel={navigateToHotel}/>;
 };
+
+export const HotelCollectionContainer = withRouter<Props>(HotelCollectionContainerInner);

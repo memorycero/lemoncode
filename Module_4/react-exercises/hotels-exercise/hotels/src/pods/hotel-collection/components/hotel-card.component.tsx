@@ -1,7 +1,7 @@
 import * as React from "react";
 import Card from "@material-ui/core/Card";
 import { HotelEntityVm } from "../hotel-collection.vm";
-import {Theme} from "@material-ui/core/styles";
+import {Theme, makeStyles} from "@material-ui/core/styles";
 import CardHeader from "@material-ui/core/CardHeader/CardHeader";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import IconButton from "@material-ui/core/IconButton/IconButton";
@@ -14,22 +14,30 @@ import {
   Typography,
   CardActions
 } from "@material-ui/core";
-import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
+import {createStyles } from "@material-ui/core/styles";
 
-interface Props extends WithStyles<typeof styles> {
+interface Props {
   hotel: HotelEntityVm;
+  onEditHotelClick: (id:string) => void;
 }
 
-const styles = (theme : Theme)  =>
+const useStyles = makeStyles((theme : Theme)  =>
   createStyles({
     card: {
       width: "500px",
-      marginTop: theme.spacing.unit
+      marginTop: theme.spacing(1),
     }
-  });
+  })
+);
 
-export const HotelCardInner = (props: Props) => {
-  const {hotel, classes} = props;
+export const HotelCard = (props: Props) => {
+  const {hotel, onEditHotelClick} = props;
+
+  const classes = useStyles();
+
+  const handleOnEditHotelClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+    onEditHotelClick(hotel.id);
+  }
 
   return (
     <Card className={classes.card}>
@@ -61,9 +69,9 @@ export const HotelCardInner = (props: Props) => {
           </Typography>
         </div>
       </CardContent>
-      <CardActions disableActionSpacing>
+      <CardActions>
         <IconButton aria-label="Add to favorites">
-          <EditIcon />
+          <EditIcon onClick={handleOnEditHotelClick}/>
         </IconButton>
         <IconButton aria-label="Share">
           <DeleteIcon />
@@ -72,5 +80,3 @@ export const HotelCardInner = (props: Props) => {
     </Card>
   );
 };
-
-export const HotelCard = withStyles(styles)(HotelCardInner);
