@@ -5,4 +5,5 @@ export interface HotelEntityVm {
   description : string;
   rating : number;
   address : string;
+  city : string;
 }

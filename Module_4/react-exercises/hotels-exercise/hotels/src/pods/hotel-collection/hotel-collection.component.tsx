@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withStyles, createStyles, WithStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { HotelEntityVm } from "./hotel-collection.vm";
 import { HotelCard } from "./components/hotel-card.component"; // on next step we will create this component
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme:Theme) => createStyles({
 export const HotelCollectionComponent = (props: Props) => {
   const { hotelCollection, onEditHotel} = props;
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   return (
     <div className={classes.listLayout}>

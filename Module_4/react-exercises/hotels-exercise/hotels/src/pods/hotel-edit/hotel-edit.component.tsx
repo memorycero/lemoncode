@@ -1,10 +1,7 @@
 import * as React from "react";
 import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
-import { TextField, CardMedia, Card, InputLabel, Select, MenuItem, Button } from "@material-ui/core";
+import { TextField, CardMedia, Card, Button } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { StateEntityVm } from "./states-collection.vm";
-import { getStatesCollection } from "./states-collection.api";
-import { mapStateEntityApiToVmCollection } from "./states-collection.mapper";
 
 interface Props {
   hotel: HotelEntityVm;
@@ -15,6 +12,7 @@ const useStyles = makeStyles((theme:Theme) =>
     container: {
       display: 'flex',
       flexWrap: 'wrap',
+      flexDirection: 'column',
     },
     textField: {
       marginLeft: theme.spacing(1),
@@ -35,70 +33,58 @@ const useStyles = makeStyles((theme:Theme) =>
 
 export const HotelEditComponent = (props: Props) => {
   const { hotel } = props;
-  const [values, setValues] = React.useState({ age: '', name: 'hai' });
-  const [states, setStates] = React.useState<StateEntityVm[]>([]);
-  const classes = useStyles();
+  const classes = useStyles({});
 
   React.useEffect(() => {
-    getStatesCollection().then((result) => {
-      const statesCollectionVm = mapStateEntityApiToVmCollection(result["states"]);
-      setStates(statesCollectionVm);
-    });
+    
   }, [])
   return (
     <>
-    <h1>Edit hotel: {hotel.name}</h1>
+      <TextField
+        id="name"
+        className={classes.textField}
+        label="Name"
+        style={{ margin: 8 }}
+        value={hotel.name}
+        fullWidth
+        margin="normal"
+      />
+      <Card className={classes.card}>
+        <CardMedia
+          className={classes.media}
+          image={hotel.picture}
+          title={hotel.name}
+        />
+      </Card>
+      <TextField
+        id="image-url"
+        className={classes.textField}
+        label="Image url"
+        style={{ margin: 8 }}
+        value={hotel.picture}
+        fullWidth
+        margin="normal"
+      />
+      <TextField
+        id="description"
+        label="Description"
+        value={hotel.description}
+        multiline
+        fullWidth
+        className={classes.textField}
+        margin="normal"
+      />
+      <TextField
+        id="city"
+        className={classes.textField}
+        label="City"
+        style={{ margin: 8 }}
+        value={hotel.city}
+        margin="normal"
+      />
+      <Button variant="contained" color="primary" className={classes.button}>
+        Save
+      </Button>
     </>
-    // <>
-    //   <TextField
-    //     id="name"
-    //     className={classes.textField}
-    //     label="Name"
-    //     style={{ margin: 8 }}
-    //     placeholder={hotel.name}
-    //     fullWidth
-    //     margin="normal"
-    //     InputLabelProps={{
-    //       shrink: true,
-    //     }}
-    //   />
-    //   <Card className={classes.card}>
-    //     <CardMedia
-    //       className={classes.media}
-    //       image={hotel.picture}
-    //       title={hotel.name}
-    //     />
-    //   </Card>
-    //   <TextField
-    //     id="image-url"
-    //     className={classes.textField}
-    //     label="Image url"
-    //     style={{ margin: 8 }}
-    //     placeholder={hotel.picture}
-    //     fullWidth
-    //     margin="normal"
-    //     InputLabelProps={{
-    //       shrink: true,
-    //     }}
-    //   />
-    //   <InputLabel htmlFor="city">City</InputLabel>
-    //   <Select
-    //     value={values.age}
-    //     inputProps={{
-    //       name: 'city',
-    //       id: 'city',
-    //     }}
-    //   >
-    //     {
-    //       states.map((state) => 
-    //         <MenuItem value={state.name}>{state.name}</MenuItem>
-    //       )
-    //     }
-    //   </Select>
-    //   <Button variant="contained" color="primary" className={classes.button}>
-    //     Save
-    //   </Button>
-    // </>
   )
-
 }

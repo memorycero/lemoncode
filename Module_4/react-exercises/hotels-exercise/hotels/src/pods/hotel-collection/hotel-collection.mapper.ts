@@ -9,7 +9,8 @@ export const mapFromApiToVm = (apiEntity : HotelEntityApi) : HotelEntityVm => ({
   description : apiEntity.shortDescription,
   rating : apiEntity.hotelRating,
   address : apiEntity.address1,
-});
+  city: apiEntity.city
+}); 
     
 
 

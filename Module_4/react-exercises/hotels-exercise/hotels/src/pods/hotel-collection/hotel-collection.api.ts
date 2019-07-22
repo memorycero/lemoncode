@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosError } from "axios";
 import {baseApiUrl} from 'core'
 
 export interface HotelEntityApi {
@@ -40,13 +40,42 @@ export interface HotelEntityApi {
 }
 
 const getHotelsUrl = `${baseApiUrl}/api/hotels`;
+const getHotelByIdUrl = `${baseApiUrl}/api/hotels?id=`;
 
-
-// TODO: Just only managing the "happy path", adding error handling here or upper level 
-// would be a good idea
 export const getHotelCollection = () : Promise<HotelEntityApi[]> => {  
-  const promise = new Promise<HotelEntityApi[]>((resolve, reject) => 
-    Axios.get<HotelEntityApi[]>(getHotelsUrl).then((response) => resolve(response.data['hotels'])
-  ));
+  const promise = new Promise<HotelEntityApi[]>((resolve, reject) => {
+    setTimeout(() => {
+      Axios.get<HotelEntityApi[]>(getHotelsUrl)
+      .then((response) => resolve(response.data))
+      .catch((error: AxiosError) => {
+        reject(error);
+        alert(getMessageError(error));
+      });
+    }, 2000);
+  });
   return promise;
+}
+
+export const getHotelById = (id: string) : Promise<HotelEntityApi> => {  
+  const promise = new Promise<HotelEntityApi>((resolve, reject) => {
+    setTimeout(() => {
+      Axios.get<HotelEntityApi>(`${getHotelByIdUrl}${id}`)
+      .then((response) => resolve(response.data[0]))
+      .catch((error: AxiosError) => {
+        reject(error);
+        alert(getMessageError(error));
+      });
+    }, 2000);
+  });
+  return promise;
+}
+
+const getMessageError = (error: AxiosError) : string => {
+    if(error.response){
+      switch (error.response.status) {
+        case 404: return 'Data not found';
+        case 503: return 'Service unavailable';
+      }
+    }
+    return 'Request cannot be processed';
 }

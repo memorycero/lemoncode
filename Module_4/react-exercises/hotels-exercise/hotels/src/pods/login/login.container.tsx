@@ -77,4 +77,4 @@ export const LoginContainerInner = (props: Props) => {
   );
 };
 
-export const LoginContainer = withRouter<Props>(LoginContainerInner);
+export const LoginContainer = withRouter<Props, any>(LoginContainerInner);

@@ -10,6 +10,7 @@ export const mapFromApiToVm = (apiEntity: HotelEntityApi) : HotelEntityVm => ({
   rating: apiEntity.hotelRating, 
   description: apiEntity.shortDescription, 
   address: apiEntity.address1, 
+  city: apiEntity.city,
 });
 
 export const mapFromApiCollectionToVmCollection = (apiEntityCollection : HotelEntityApi[]) : HotelEntityVm[] => 

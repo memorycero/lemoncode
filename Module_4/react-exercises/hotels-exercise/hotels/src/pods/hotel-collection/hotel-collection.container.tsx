@@ -5,8 +5,10 @@ import { routesLinks } from "core";
 import { getHotelCollection } from "./hotel-collection.api";
 import { mapFromApiCollectionToVmCollection } from "common";
 import { RouteComponentProps, withRouter } from "react-router";
+import { LoadingSpinerComponent } from "../../common/components/spinner";
+import { trackPromise } from "react-promise-tracker";
 
-interface Props extends RouteComponentProps {}
+interface Props extends RouteComponentProps { }
 
 const useHotelCollection = () => {
   const [hotelCollection, setHotelCollection] = React.useState<HotelEntityVm[]>(
@@ -14,28 +16,35 @@ const useHotelCollection = () => {
   );
 
   const loadHotelCollection = () =>
-    getHotelCollection().then(result =>
+    trackPromise(getHotelCollection().then(result =>
       setHotelCollection(mapFromApiCollectionToVmCollection(result))
-    );
+    ));
 
   return { hotelCollection, loadHotelCollection };
 };
 
 export const HotelCollectionContainerInner = (props: Props) => {
-  const {hotelCollection, loadHotelCollection} = useHotelCollection();
-  const {history} = props;
+  const { hotelCollection, loadHotelCollection } = useHotelCollection();
+  const { history } = props;
 
   React.useEffect(() => {
     loadHotelCollection();
 
-    return () => {console.log('do your cleanup here')}
+    return () => { console.log('do your cleanup here') }
   }, []);
 
   const navigateToHotel = (id: string) => {
     history.push(routesLinks.hotelEdit(id));
   }
 
-  return <HotelCollectionComponent hotelCollection={hotelCollection} onEditHotel={navigateToHotel}/>;
+  return (
+    <>
+      <LoadingSpinerComponent>
+      <HotelCollectionComponent hotelCollection={hotelCollection} onEditHotel={navigateToHotel} />
+      </LoadingSpinerComponent>
+    </>
+      
+  )
 };
 
-export const HotelCollectionContainer = withRouter<Props>(HotelCollectionContainerInner);
+export const HotelCollectionContainer = withRouter<Props, any>(HotelCollectionContainerInner);

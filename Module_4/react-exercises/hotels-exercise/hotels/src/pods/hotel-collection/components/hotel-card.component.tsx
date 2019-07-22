@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme : Theme)  =>
 export const HotelCard = (props: Props) => {
   const {hotel, onEditHotelClick} = props;
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const handleOnEditHotelClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     onEditHotelClick(hotel.id);

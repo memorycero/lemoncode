@@ -4,9 +4,9 @@ import { HashRouter, Switch, Route } from "react-router-dom";
 import { LoginPage, HotelCollectionPage, HotelEditPage } from "./scenes";
 import { routerSwitchRoutes, SessionProvider } from "core";
 
-
 ReactDOM.render(
-  <SessionProvider>
+  <>
+    <SessionProvider>
     <HashRouter>
       <Switch>
         <Route
@@ -24,6 +24,7 @@ ReactDOM.render(
         />
       </Switch>
     </HashRouter>
-  </SessionProvider>,
+  </SessionProvider>
+  </>,
   document.getElementById("root")
 );
