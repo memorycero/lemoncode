@@ -1,0 +1,28 @@
+{
+  "name": "rest-api-exercise-client",
+  "version": "0.0.0",
+  "description": "REST api client exercise",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "REST",
+    "api",
+    "fetch",
+    "promises",
+    "axios"
+  ],
+  "author": "Jaime Salas",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.5.5",
+    "axios": "^0.18.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "parcel": "^1.11.0"
+  }
+}
