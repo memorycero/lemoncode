@@ -1,4 +1,4 @@
-import {HotelEntityApi} from './hotel-collection.api';
+import {HotelEntityApi} from "../../api";
 import {HotelEntityVm} from './hotel-collection.vm';
 import {basePicturesUrl} from 'core';
 

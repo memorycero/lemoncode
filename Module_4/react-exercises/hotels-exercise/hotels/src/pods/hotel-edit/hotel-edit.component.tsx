@@ -1,26 +1,27 @@
 import * as React from "react";
 import { HotelEntityVm } from "../hotel-collection/hotel-collection.vm";
-import { TextField, CardMedia, Card, Button } from "@material-ui/core";
+import { CardMedia, Card, Button, Typography } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import { TextFieldForm } from "common/components/text-field";
+import { HotelFormErrors } from "./hotel-edit.vm";
 
 interface Props {
   hotel: HotelEntityVm;
+  onSave: () => void;
+  onFieldUpdate: (field, value) => void;
+  hotelFormErrors: HotelFormErrors;
 }
 
-const useStyles = makeStyles((theme:Theme) =>
+const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
       flexDirection: 'column',
     },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: '50%',
-    },
     card: {
-      maxWidth: '50%',
+      maxWidth: '100%',
     },
     media: {
       paddingTop: '50%', // 16:9
@@ -28,26 +29,32 @@ const useStyles = makeStyles((theme:Theme) =>
     button: {
       margin: theme.spacing(1),
     },
+    rating: {
+      marginLeft: '5px',
+    }
   })
 );
 
 export const HotelEditComponent = (props: Props) => {
-  const { hotel } = props;
+  const { hotel, onSave, onFieldUpdate, hotelFormErrors } = props;
   const classes = useStyles({});
 
-  React.useEffect(() => {
-    
-  }, [])
+  const handleOnSaveHotel = () => {
+    onSave();
+  }
+
+  const handleOnUpdateField = (fieldId: keyof HotelEntityVm) => e => {
+    onFieldUpdate(fieldId, e.target.value);
+  }
+  
   return (
     <>
-      <TextField
-        id="name"
-        className={classes.textField}
+      <TextFieldForm
         label="Name"
-        style={{ margin: 8 }}
+        name="name"
         value={hotel.name}
-        fullWidth
-        margin="normal"
+        onChange={onFieldUpdate}
+        error={hotelFormErrors.name.errorMessage}
       />
       <Card className={classes.card}>
         <CardMedia
@@ -56,33 +63,38 @@ export const HotelEditComponent = (props: Props) => {
           title={hotel.name}
         />
       </Card>
-      <TextField
-        id="image-url"
-        className={classes.textField}
+      <TextFieldForm
         label="Image url"
-        style={{ margin: 8 }}
+        name="picture"
         value={hotel.picture}
-        fullWidth
-        margin="normal"
+        onChange={onFieldUpdate}
+        error={hotelFormErrors.picture.errorMessage}
       />
-      <TextField
-        id="description"
+      <TextFieldForm
         label="Description"
+        name="description"
         value={hotel.description}
-        multiline
-        fullWidth
-        className={classes.textField}
-        margin="normal"
+        multiline={true}
+        onChange={onFieldUpdate}
+        error={hotelFormErrors.description.errorMessage}
       />
-      <TextField
-        id="city"
-        className={classes.textField}
+      <TextFieldForm
+        name="city"
         label="City"
-        style={{ margin: 8 }}
         value={hotel.city}
-        margin="normal"
+        onChange={onFieldUpdate}
+        error={hotelFormErrors.city.errorMessage}
       />
-      <Button variant="contained" color="primary" className={classes.button}>
+      <div className={classes.rating}>
+        <Typography component="legend">Rating</Typography>
+        <Rating
+          name="rating"
+          value={hotel.rating}
+          size="large"
+          onChange={handleOnUpdateField('rating')}
+        />
+      </div>
+      <Button variant="contained" color="primary" className={classes.button} onClick={handleOnSaveHotel}>
         Save
       </Button>
     </>

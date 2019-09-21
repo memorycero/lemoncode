@@ -35,7 +35,7 @@ export const HotelCard = (props: Props) => {
 
   const classes = useStyles({});
 
-  const handleOnEditHotelClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
+  const handleOnEditHotelClick = () => {
     onEditHotelClick(hotel.id);
   }
 
@@ -70,8 +70,8 @@ export const HotelCard = (props: Props) => {
         </div>
       </CardContent>
       <CardActions>
-        <IconButton aria-label="Add to favorites">
-          <EditIcon onClick={handleOnEditHotelClick}/>
+        <IconButton aria-label="Add to favorites" onClick={handleOnEditHotelClick}>
+          <EditIcon />
         </IconButton>
         <IconButton aria-label="Share">
           <DeleteIcon />

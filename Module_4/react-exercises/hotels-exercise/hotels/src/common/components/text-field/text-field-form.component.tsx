@@ -10,6 +10,7 @@ interface Props {
   error?: string;
   type?: string;
   onBlur?: (field: string, value) => void;
+  multiline?: boolean; 
 }
 
 const handleChange = (field: string, onChange) => e => {
@@ -30,6 +31,7 @@ export const TextFieldForm: React.StatelessComponent<Props> = ({
   error,
   type,
   onBlur,
+  multiline,
 }) => (
   <>
     <TextField
@@ -39,6 +41,8 @@ export const TextFieldForm: React.StatelessComponent<Props> = ({
       type={type}
       onChange={handleChange(name, onChange)}
       onBlur={handleBlur(name, onBlur)}
+      fullWidth
+      multiline={multiline}
     />
     <Typography variant="caption" color="error" gutterBottom={true}>
       {error}

@@ -2,7 +2,7 @@ import * as React from "react";
 import { HotelCollectionComponent } from "./hotel-collection.component";
 import { HotelEntityVm } from "./hotel-collection.vm";
 import { routesLinks } from "core";
-import { getHotelCollection } from "./hotel-collection.api";
+import { getHotelCollection } from "../../api";
 import { mapFromApiCollectionToVmCollection } from "common";
 import { RouteComponentProps, withRouter } from "react-router";
 import { LoadingSpinerComponent } from "../../common/components/spinner";

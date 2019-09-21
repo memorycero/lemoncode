@@ -1,4 +1,4 @@
-import { HotelEntityApi } from '../pods/hotel-collection/hotel-collection.api';
+import { HotelEntityApi } from  '../api';
 import {HotelEntityVm} from '../pods/hotel-collection/hotel-collection.vm';
 import {baseApiUrl} from 'core';
 
