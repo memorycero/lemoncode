@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const MemberRow: React.FunctionComponent<Props> = props => {
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   return (
     <TableRow key={props.member.id}>

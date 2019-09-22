@@ -33,14 +33,15 @@ export const MembersTableComponent: React.FunctionComponent<Props> = props => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const classes = useStyles();
+  const classes = useStyles({});
 
   const loadMembers = () => {
     memberAPI.getAllMembers(organizationName).then(members => setMembers(members));
   };
 
   const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setOrganizationName(event.target.value);
+    const eventValue = event.target.value;
+    setOrganizationName(eventValue === '' ? 'lemoncode' : eventValue);
   }
 
   function handleChangePage(

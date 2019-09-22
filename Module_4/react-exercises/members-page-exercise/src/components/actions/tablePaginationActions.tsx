@@ -24,7 +24,7 @@ interface TablePaginationActionsProps {
 }
 
 function TablePaginationActions(props: TablePaginationActionsProps) {
-  const classes = useStyles();
+  const classes = useStyles({});
   const theme = useTheme();
   const { count, page, rowsPerPage, onChangePage } = props;
 
