@@ -1,6 +1,11 @@
 <template>
   <div>
     <h2>Member Page</h2>
+    <input 
+      type="text" 
+      placeholder="Organization" 
+      v-bind:value="organization" 
+      v-on:input="organization = $event.target.value">
     <button @click="loadMembers">Load</button>
     <table :class="$style.table">
       <thead>
@@ -26,13 +31,18 @@ export default Vue.extend({
   name: "MemberTable",
   components: { MemberHead, MemberRow },
   data: () => ({
-    members: [] as Member[]
+    members: [] as Member[],
+    organization: ''
   }),
   methods: {
     loadMembers: function() {
-      getAllMembers("lemoncode").then(members => {
+      getAllMembers(this.getOrganizationName()).then(members => {
         this.members = members;
       });
+    },
+    getOrganizationName: function() {
+      return this.organization === '' || this.organization === undefined 
+        ? 'lemoncode': this.organization;
     }
   }
 });
