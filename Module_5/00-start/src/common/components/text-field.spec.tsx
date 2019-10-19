@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react';
 import { TextField } from './text-field';
 
 describe('text-field component specs', () => {
-    it('should display the component empty when it mounts', () => {
+    it('should display the component when it mounts', () => {
         //Arrange
         const props = {
             name: 'name',
@@ -37,7 +37,7 @@ describe('text-field component specs', () => {
 
     });
 
-    it('should call onBlur method when the component loose focus', () => {
+    it('should call onBlur property when the component loses focus', () => {
         // Arrange
         const props = {
             name: 'name',
