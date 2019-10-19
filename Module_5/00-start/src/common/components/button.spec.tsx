@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render, fireEvent, getByLabelText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { Button } from './button';
 
 describe('Button component specs', () => {
@@ -13,7 +13,7 @@ describe('Button component specs', () => {
         const { getByText, asFragment } = render(<Button {...props} />);
 
         // Assert
-        getByText(props.label);
+        expect(getByText(props.label)).not.toBeNull();
         expect(asFragment()).toMatchSnapshot();
 
     });
