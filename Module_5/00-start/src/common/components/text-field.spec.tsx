@@ -6,9 +6,9 @@ describe('text-field component specs', () => {
     it('should display the component when it mounts', () => {
         //Arrange
         const props = {
-            name: 'name',
-            label: 'label',
-            value: 'value',
+            name: '',
+            label: '',
+            value: '',
             onChange: jest.fn()
         };
         //Act
@@ -23,13 +23,14 @@ describe('text-field component specs', () => {
         const props = {
             name: 'name',
             label: 'label',
-            value: 'value',
+            value: 'Salt',
             onChange: jest.fn()
         };
 
         // Act
-        const { getByDisplayValue } = render(<TextField {...props} />);
-        fireEvent.change(getByDisplayValue(props.value), { target: { value: 'new value' } });
+        const { getByDisplayValue} = render(<TextField {...props} />);
+        const textInput = getByDisplayValue(props.value) as HTMLInputElement;
+        fireEvent.change(textInput, { target: { value: 'new value' } });
 
         // Assert
         expect(props.onChange).toHaveBeenCalled();
@@ -42,14 +43,15 @@ describe('text-field component specs', () => {
         const props = {
             name: 'name',
             label: 'label',
-            value: 'value',
+            value: 'Salt',
             onChange: jest.fn(),
             onBlur: jest.fn()
         };
 
         // Act
         const { getByDisplayValue } = render(<TextField {...props} />);
-        fireEvent.blur(getByDisplayValue(props.value));
+        const textInput = getByDisplayValue(props.value) as HTMLInputElement;
+        fireEvent.blur(textInput);
 
         // Assert
         expect(props.onBlur).toHaveBeenCalled();

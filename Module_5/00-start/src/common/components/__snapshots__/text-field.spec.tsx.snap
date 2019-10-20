@@ -1,16 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`text-field component specs should display the component empty when it mounts 1`] = `
+exports[`text-field component specs should display the component when it mounts 1`] = `
 <DocumentFragment>
   <div
     class="MuiFormControl-root MuiTextField-root MuiFormControl-marginNormal"
   >
-    <label
-      class="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled"
-      data-shrink="true"
-    >
-      label
-    </label>
     <div
       class="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
     >
@@ -18,7 +12,7 @@ exports[`text-field component specs should display the component empty when it m
         aria-invalid="false"
         class="MuiInputBase-input MuiInput-input"
         type="text"
-        value="value"
+        value=""
       />
     </div>
   </div>
