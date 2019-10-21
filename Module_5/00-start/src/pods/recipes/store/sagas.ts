@@ -7,7 +7,7 @@ export const watchRecipesPodSagas = function*() {
   yield takeLatest(actionTypes.GET_RECIPES_REQUEST, getRecipesRequestSaga);
 };
 
-function* getRecipesRequestSaga() {
+export function* getRecipesRequestSaga() {
   const recipes = yield call(getRecipes);
   yield put(updateRecipes(recipes));
 }
