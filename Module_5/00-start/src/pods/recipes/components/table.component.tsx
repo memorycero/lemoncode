@@ -34,6 +34,7 @@ export const TableComponent: React.FunctionComponent<Props> = props => {
         <TableBody>
           {recipes.map(recipe => (
             <TableRow
+              data-testid='material-table-row'
               key={recipe.name}
               className={classes.row}
               onClick={handleNavigation(recipe.id)}
